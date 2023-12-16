@@ -8,7 +8,6 @@ const nodemailer = require("nodemailer");
 const { email, emailPassword } = require("../config/config");
 
 // Email
-
 const sendResetPasswordMail = async (name, email, user_id) => {
   try {
     const transporter = nodemailer.createTransport({
@@ -20,7 +19,6 @@ const sendResetPasswordMail = async (name, email, user_id) => {
         pass: "gobxbiovuyuiggxh",
       },
     });
-
     const emailTemplate = path.join(__dirname, "../view/Email/Email.ejs");
     const data = await ejs.renderFile(emailTemplate, {
       name,

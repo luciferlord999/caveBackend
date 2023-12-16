@@ -50,7 +50,10 @@ const adminController = require("../controller/AdminController");
 admin_routes.get("/", auth.isLogout, adminController.login);
 admin_routes.get("/logout", auth.isLogin, adminController.logout);
 admin_routes.post("/post-login", adminController.postLogin);
-admin_routes.get("/dashboard", adminController.dashboard);
+admin_routes.get("/dashboard", auth.isLogin, adminController.dashboard);
 // <==========CRUD Route for user =========================>
-admin_routes.get("/all-user", adminController.getUser);
+admin_routes.get("/all-user", auth.isLogin, adminController.getUser);
+admin_routes.get("/verify-user", adminController.verifiySingupLoad);
+admin_routes.get("/delete-user", auth.isLogin, adminController.deleteUser);
+
 module.exports = admin_routes;

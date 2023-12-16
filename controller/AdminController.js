@@ -70,7 +70,7 @@ const dashboard = async (req, res, next) => {
     console.log(error.message);
   }
 };
-// get all User
+// get all User || Delete User
 
 const getUser = async (req, res, next) => {
   try {
@@ -83,10 +83,40 @@ const getUser = async (req, res, next) => {
     console.log(error.message);
   }
 };
+// verify user
+
+const verifiySingupLoad = async (req, res) => {
+  try {
+    const id = req.query.id;
+    const tokenData = await User.updateOne(
+      { _id: id },
+      { $set: { is_verified: 1 } }
+    );
+    if (tokenData) {
+      res.status(200).send({ message: "Verify Successfully" });
+    } else {
+      res.status(400).send({ message: "Token is Invalid" });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const id = req.query.id;
+    await User.deleteOne({ _id: id });
+    return res.redirect("/all-user");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 module.exports = {
   login,
   dashboard,
   postLogin,
   logout,
   getUser,
+  deleteUser,
+  verifiySingupLoad,
 };

@@ -62,17 +62,6 @@ app.use("/", adminRoute);
 const apiRoute = require("./routes/apiRoutes");
 app.use("/api/v1", apiRoute);
 
-io.on("connection", (socket) => {
-  console.log("a user connected");
-
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
-  });
-});
-
-
-
-
 server.listen(PORT || 5000, () => {
   console.log(`server start ${PORT || 5000}`);
 });
